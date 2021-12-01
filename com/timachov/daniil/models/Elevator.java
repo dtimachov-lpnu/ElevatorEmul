@@ -7,11 +7,12 @@ import java.util.LinkedList;
 public class Elevator {
     public static class Request {
         public Person person;
-        public Floor floor;
+        public Floor srcFloor, dstFloor;
 
-        public Request(Person person_, Floor floor_) {
+        public Request(Person person_, Floor srcFloor_, Floor dstFloor_) {
             this.person = person_;
-            this.floor = floor_;
+            this.srcFloor = srcFloor_;
+            this.dstFloor = dstFloor_;
         }
     };
 
@@ -38,7 +39,7 @@ public class Elevator {
     void run() {
         while (!requestQueue.isEmpty()) {
             Request targetRequest = moveStrategy.getTargetRequest(this);
-            int targetFloor = targetRequest.floor.getStage();
+            int targetFloor = targetRequest.dstFloor.getStage();
             int diff = targetFloor - this.currentFloor;
             
             this.isBusy = true;
@@ -62,8 +63,7 @@ public class Elevator {
                 if (targetRequest.person != null) {
                     if (currentLoadKg + targetRequest.person.getWeight() <= maxWeight) {
                         currentLoad.add(targetRequest.person);
-                        if (targetRequest.floor.getStage() != currentFloor)
-                            targetRequest.floor.popPerson();
+                        targetRequest.srcFloor.popPerson();
                     }
                 }
             }

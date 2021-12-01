@@ -34,12 +34,12 @@ public class Floor {
     }
 
     public void enqueueElevator(Elevator elevator) {
-        Request request = new Request(this.peopleAwaiting.peek(), this);
+        Request request = new Request(this.peopleAwaiting.peek(), this, this);
         elevator.requestQueue.add(request);
     }
 
-    public void enqueueElevator(Elevator elevator, Floor destFloor) {
-        Request request = new Request(this.peopleAwaiting.peek(), destFloor);
+    public void enqueueElevator(Elevator elevator, Floor dstFloor) {
+        Request request = new Request(this.peopleAwaiting.peek(), this, dstFloor);
         elevator.requestQueue.add(request);
     }
 };

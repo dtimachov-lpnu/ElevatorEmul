@@ -11,11 +11,12 @@ class Main
         building.getFloor(0).addPerson(new Person(60));
         building.getFloor(0).addPerson(new Person(38));
 
-        building.getFloor(0).enqueueElevator(building.getElevator(0));
-        building.getFloor(0).enqueueElevator(building.getElevator(1));
-
-        building.getFloor(2).enqueueElevator(building.getElevator(0));
-        building.getFloor(1).enqueueElevator(building.getElevator(0));
+        building.getFloor(0).enqueueElevator(building.getElevator(0), building.getFloor(2));
+        building.getFloor(0).enqueueElevator(building.getElevator(0), building.getFloor(1));
+        building.getFloor(0).enqueueElevator(building.getElevator(0), building.getFloor(0));
+        building.getFloor(0).enqueueElevator(building.getElevator(0), building.getFloor(1));
+        building.getFloor(0).enqueueElevator(building.getElevator(0), building.getFloor(0));
+        building.getFloor(0).enqueueElevator(building.getElevator(0), building.getFloor(2));
 
         building.runAllElevators();
     }
